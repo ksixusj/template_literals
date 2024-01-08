@@ -1,0 +1,60 @@
+[
+    {
+   
+     "id" : 101, 
+     "firstName": "Jefferlyn",
+     "lastName" : "Sarabosing", 
+     "age" : 21, 
+     "images" : " https://pics.craiyon.com/2023-09-28/ac0b9291db9f47a187bed7cda0c4fbb0.webp"
+     
+
+    },
+
+    {
+   
+        "id" : 102, 
+        "firstName": "John Paul",
+        "lastName" : "Parale", 
+        "age" : 17, 
+        "images" : " https://cdn.pixabay.com/photo/2023/04/26/18/35/ai-generated-7953117_1280.png"
+        
+   
+       },
+       
+       {
+   
+        "id" : 103, 
+        "firstName": "John Paul",
+        "lastName" : "Aquisap", 
+        "age" : 17, 
+        "images" : " https://imgv3.fotor.com/images/gallery/a-man-animed-character-generated-by-cartoon-character-maker-in-Fotor.jpg"
+        
+   
+       },
+       
+       {
+   
+        "id" : 104, 
+        "firstName": " Jhana ",
+        "lastName" : "Limbag", 
+        "age" : 18, 
+        "images" : " https://t3.ftcdn.net/jpg/05/98/48/88/360_F_598488869_fiLUgajDxyaoxE9D3SuHMZfD56IjrBXe.jpg"
+        
+   
+       },
+
+       {
+   
+        "id" : 105, 
+        "firstName": " Mark Anthony",
+        "lastName" : "Enriquez", 
+        "age" : 17, 
+        "images" : "https://cdn.pixabay.com/photo/2023/08/17/18/59/ai-generated-8197193_1280.jpg"
+        
+   
+       }
+   
+   
+
+
+]

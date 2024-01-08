@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .image-format {
+            width: 60px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        tbody tr:hover {
+            background-color: #eaf6ff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @media screen and (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+            td, th {
+                display: block;
+            }
+            td {
+                text-align: right;
+            }
+            td::before {
+                font-weight: bold;
+                display: inline-block;
+                width: 100px;
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table id="container">
+            <thead>
+                <th class="cell">ID</th>
+                <th class="cell">Firstname</th>
+                <th class="cell">Lastname</th>
+                <th class="cell">Age</th>
+                <th class="cell">Image</th>
+            </thead>
+            <tbody id="output"></tbody>
+
+            <script>
+                fetch('estudyante.json') 
+                    .then(response => response.json())
+                    .then(data => {
+                        let displayOutput = "";
+                        for (const item of data) {
+                            displayOutput += `
+                                <tr>
+                                    <td data-label="ID">${item.id}</td>
+                                    <td data-label="Firstname">${item.firstName}</td>
+                                    <td data-label="Lastname">${item.lastName}</td>
+                                    <td data-label="Age">${item.age}</td>
+                                    <td data-label="Image"><img src="${item.images}" class="image-format"></td>
+                                </tr>
+                            `;
+                        }
+                        document.querySelector("#output").innerHTML = displayOutput;
+                    })
+            </script>
+        </table>
+    </div>
+</body>
+</html>

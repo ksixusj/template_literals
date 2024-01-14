@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One More Filled Shape</title>
+  <style>
+     body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    canvas {
+      border: 5px solid #000;
+      border-radius: 20px;
+      width: 40%;
+      height: 60%;
+    }
+    h1 {
+    width: 150px;
+  </style>
+</head>
+<body>
+    <h1>Basic Shapes</h1>
+  <canvas id="myCanvas" width="400" height="300"></canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    //circle
+    function drawFilledCircle(x, y, radius) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    //square
+    function drawFilledSquare(x, y, side) {
+      ctx.beginPath();
+      ctx.rect(x - side / 2 , y - side / 2, side, side);
+      ctx.fill();
+    }
+
+    //rectangle
+    function drawFilledRectangle(x, y, width, height) {
+      ctx.beginPath();
+      ctx.rect(x - width / 2, y - height / 2, width, height);
+      ctx.fill();
+    }
+
+    //ellipse
+    function drawFilledEllipse(x, y, radiusX, radiusY) {
+      ctx.beginPath();
+      ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    //triangle
+    function drawFilledTriangle(x1, y1, x2, y2, x3, y3) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.lineTo(x3, y3);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //pentagon
+    function drawFilledPentagon(x, y, side) {
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        const angle = (i * 2 * Math.PI) / 5;
+        const px = x + side * Math.cos(angle);
+        const py = y + side * Math.sin(angle);
+        ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //hexagon
+    function drawFilledHexagon(x, y, side) {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * 2 * Math.PI) / 6;
+        const px = x + side * Math.cos(angle);
+        const py = y + side * Math.sin(angle);
+        ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //star
+    function drawFilledStar(x, y, radius, points) {
+      ctx.beginPath();
+      for (let i = 0; i < points * 2; i++) {
+        const angle = (i * Math.PI) / points;
+        const r = i % 2 === 0 ? radius : radius / 2;
+        const px = x + r * Math.cos(angle);
+        const py = y + r * Math.sin(angle);
+        ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //heart
+    function drawFilledHeart(x, y, size) {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size, y + size / 4, x, y + size);
+      ctx.bezierCurveTo(x + size, y + size / 4, x + size / 2, y - size / 2, x, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //diamond
+    function drawFilledDiamond(x, y, size) {
+      ctx.beginPath();
+      ctx.moveTo(x, y - size / 2);
+      ctx.lineTo(x + size / 2, y);
+      ctx.lineTo(x, y + size / 2);
+      ctx.lineTo(x - size / 2, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //trapezoid
+    function drawFilledTrapezoid(x, y, topWidth, bottomWidth, height) {
+      ctx.beginPath();
+      ctx.moveTo(x - topWidth / 2, y - height / 2);
+      ctx.lineTo(x + topWidth / 2, y - height / 2);
+      ctx.lineTo(x + bottomWidth / 2, y + height / 2);
+      ctx.lineTo(x - bottomWidth / 2, y + height / 2);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //octagon
+    function drawFilledOctagon(x, y, side) {
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const angle = (i * 2 * Math.PI) / 8;
+        const px = x + side * Math.cos(angle);
+        const py = y + side * Math.sin(angle);
+        ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    //filled circle
+    ctx.fillStyle = 'red';
+    drawFilledCircle(50, 50, 40);
+
+    //filled square
+    ctx.fillStyle = 'green';
+    drawFilledSquare(143, 50, 70);
+
+    //filled rectangle
+    ctx.fillStyle = 'blue';
+    drawFilledRectangle(250, 50, 100, 60);
+
+    //filled oval
+    ctx.fillStyle = 'orange';
+    drawFilledEllipse(350, 50, 40, 30);
+
+    //filled triangle
+    ctx.fillStyle = 'purple';
+    drawFilledTriangle(20, 150, 70, 100, 120, 151);
+
+    //filled pentagon
+    ctx.fillStyle = 'brown';
+    drawFilledPentagon(170, 150, 45);
+
+    //filled hexagon
+    ctx.fillStyle = 'pink';
+    drawFilledHexagon(267, 150, 45);
+
+    //filled star
+    ctx.fillStyle = 'gold';
+    drawFilledStar(355, 150, 40, 10);
+
+    //filled heart
+    ctx.fillStyle = 'red';
+    drawFilledHeart(150, 220, 65);
+
+    //filled diamond
+    ctx.fillStyle = 'blue';
+    drawFilledDiamond(245, 245, 80);
+
+    //filled trapezoid
+    ctx.fillStyle = 'green';
+    drawFilledTrapezoid(345, 250, 55, 90, 50);
+
+    //filled octagon
+    ctx.fillStyle = 'cyan';
+    drawFilledOctagon(55, 245, 40);
+  </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+    <style>
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+        /* Form styles */
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        button {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Local Storage Example</h2>
+
+    <table id="userData">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Birthday</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>School</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be added dynamically here -->
+        </tbody>
+    </table>
+
+    <h3>Add User</h3>
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="address">Address:</label>
+        <input type="text" id="address" required>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="course">Course:</label>
+        <input type="text" id="course" required>
+        <label for="school">School:</label>
+        <input type="text" id="school" required>
+        <button type="button" onclick="addUser()">Add User</button>
+    </form>
+
+    <script>
+        // add a user to the table and local storage
+        function addUser() {
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var birthday = document.getElementById('birthday').value;
+            var email = document.getElementById('email').value;
+            var course = document.getElementById('course').value;
+            var school = document.getElementById('school').value;
+
+            if (name && address && birthday && email && course && school) {
+                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                userData.push({ name: name, address: address, birthday: birthday, email: email, course: course, school: school });
+                localStorage.setItem('userData', JSON.stringify(userData));
+                displayUserData();
+                document.getElementById('userForm').reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }//end of add user
+
+        // display user data in the table
+        function displayUserData() {
+            var userData = JSON.parse(localStorage.getItem('userData')) || [];
+            var tableBody = document.querySelector('#userData tbody');
+            tableBody.innerHTML = '';
+            var colors = ['#ffcccc', '#ffe5cc', '#ffffcc', '#ffcce5', '#ccffe5']; // 5 different colors
+            userData.forEach(function(user, index) {
+                var row = tableBody.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+               
+                if (index < 30) {
+            var colorIndex = index % 6 === 0 ? (index / 6) % 5 : index % 5;
+            row.style.backgroundColor = colors[colorIndex];
+        } else {
+            var endlessIndex = index % 30; // Make the index endless
+            var colorIndex = endlessIndex % 6 === 0 ? (endlessIndex / 6) % 5 : endlessIndex % 5;
+            row.style.backgroundColor = colors[colorIndex];
+        }
+
+                cell1.style.textAlign = 'center';
+                cell2.style.textAlign = 'center';
+                cell3.style.textAlign = 'center';
+                cell4.style.textAlign = 'center';
+                cell5.style.textAlign = 'center';
+                cell6.style.textAlign = 'center';
+                cell7.style.textAlign = 'center';
+                
+
+                cell1.innerHTML = user.name;
+                cell2.innerHTML = user.address;
+                cell3.innerHTML = user.birthday;
+                cell4.innerHTML = user.email;
+                cell5.innerHTML = user.course;
+                cell6.innerHTML = user.school;
+                cell7.innerHTML = '<button onclick="editUser(' + index + ')">Edit</button> | <button onclick="deleteUser(' + index + ')">Delete</button>';
+            });
+        }
+
+        //  edit user data
+        function editUser(index) {
+            var userData = JSON.parse(localStorage.getItem('userData')) || [];
+            var user = userData[index];
+
+            document.getElementById('name').value = user.name;
+            document.getElementById('address').value = user.address;
+            document.getElementById('birthday').value = user.birthday;
+            document.getElementById('email').value = user.email;
+            document.getElementById('course').value = user.course;
+            document.getElementById('school').value = user.school;
+
+            userData.splice(index, 1); // Remove the user from the array
+            localStorage.setItem('userData', JSON.stringify(userData));
+            displayUserData();
+        }
+
+        // delete user data
+        function deleteUser(index) {
+
+            var  response = confirm("Are you sure you want to delete this data?");
+
+            if(response){
+            var userData = JSON.parse(localStorage.getItem('userData')) || [];
+            userData.splice(index, 1); // Remove the user from the array
+            localStorage.setItem('userData', JSON.stringify(userData));
+            displayUserData();
+            }//end of if
+        
+        }//end of delete 
+
+        // Initial display of user data
+        displayUserData();
+    </script>
+
+</body>
+</html>
